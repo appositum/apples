@@ -1,9 +1,3 @@
-let mapper = t => {
-  switch(t) {
-  | (icon, link) => <a href={link}><i className={icon}></i></a>
-  };
-};
-
 let info = [|
   ("fab fa-github", "https://github.com/appositum"),
   ("fab fa-gitlab", "https://gitlab.com/appositum"),
@@ -20,12 +14,11 @@ let info = [|
 
 let panel = ReasonReact.statelessComponent("Panel");
 
+let mapper = ((icon, link)) => {
+  <a href={link}><i className={icon}></i></a>
+};
+
 let make = _children => {
   ...panel,
-  render: _self =>
-    (
-      info
-      |. Belt.Array.map(mapper)
-      |. ReasonReact.array
-    )
+  render: _self => info -> Belt.Array.map(mapper) -> ReasonReact.array
 };
