@@ -15,10 +15,15 @@ let info = [|
 let panel = ReasonReact.statelessComponent("Panel");
 
 let mapper = ((icon, link)) => {
-  <a href={link}><i className={icon}></i></a>
+  let icon_style = ReactDOMRe.Style.make(~fontSize="35px", ~padding="15px", ());
+  let anchor_style = ReactDOMRe.Style.make(~color="#cecece", ());
+  <a href={link} style=anchor_style><i className={icon} style=icon_style></i></a>
 };
 
 let make = _children => {
   ...panel,
-  render: _self => info -> Belt.Array.map(mapper) -> ReasonReact.array
+  render: _self =>
+    <footer style=ReactDOMRe.Style.make(~marginTop="30px", ())>
+    (info -> Belt.Array.map(mapper) -> ReasonReact.array)
+    </footer>
 };
