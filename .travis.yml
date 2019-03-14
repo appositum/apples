@@ -1,0 +1,14 @@
+os: osx
+language: ocaml
+
+before_install:
+  brew install yarn
+
+install:
+  yarn install
+
+script:
+  yarn build
+
+notifications:
+  email: false
